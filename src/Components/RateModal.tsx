@@ -197,12 +197,16 @@ export class RateModal extends Component<IProps, IState> {
 		const {
 			storeRedirectThreshold,
 			playStoreUrl,
-			iTunesStoreUrl
+			iTunesStoreUrl,
+			onStoreRedirect
 		} = this.props;
 		if (this.state.rating > storeRedirectThreshold) {
 			Platform.OS === "ios"
 				? Linking.openURL(iTunesStoreUrl)
 				: Linking.openURL(playStoreUrl);
+			if (onStoreRedirect) {
+				onStoreRedirect();
+			}
 		} else {
 			this.setState({ showContactForm: true });
 		}
