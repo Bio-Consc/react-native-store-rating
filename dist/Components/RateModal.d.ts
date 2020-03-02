@@ -18,7 +18,9 @@ export declare class RateModal extends Component<IProps, IState> {
     };
     constructor(props: IProps);
     render(): JSX.Element;
-    componentWillReceiveProps(nextProps: any): void;
+    static getDerivedStateFromProps(nextProps: any, prevState: any): {
+        isModalOpen: any;
+    };
     private onStarSelected;
     private renderRateModal;
     private renderRatingView;

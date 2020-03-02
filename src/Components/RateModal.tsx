@@ -67,12 +67,13 @@ export class RateModal extends Component<IProps, IState> {
 		);
 	}
 
-	public componentWillReceiveProps(nextProps): void {
-		if (this.props.isModalOpen !== nextProps.isModalOpen) {
-			this.setState({
+	static getDerivedStateFromProps(nextProps, prevState) {
+		if (prevState.isModalOpen !== nextProps.isModalOpen) {
+			return {
 				isModalOpen: nextProps.isModalOpen
-			});
+			};
 		}
+		return null;
 	}
 
 	private onStarSelected(e: number): void {

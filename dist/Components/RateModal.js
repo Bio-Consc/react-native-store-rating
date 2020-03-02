@@ -40,12 +40,13 @@ class RateModal extends react_1.Component {
         const { isModalOpen } = this.state;
         return (react_1.default.createElement(react_native_1.Modal, { transparent: isTransparent, visible: isModalOpen, onRequestClose: () => onClosed }, this.renderRateModal()));
     }
-    componentWillReceiveProps(nextProps) {
-        if (this.props.isModalOpen !== nextProps.isModalOpen) {
-            this.setState({
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (prevState.isModalOpen !== nextProps.isModalOpen) {
+            return {
                 isModalOpen: nextProps.isModalOpen
-            });
+            };
         }
+        return null;
     }
     onStarSelected(e) {
         const { onStarSelected } = this.props;
