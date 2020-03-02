@@ -1,5 +1,5 @@
-import { Component } from 'react';
-import { IProps, IState } from '../Interfaces/IRateModal';
+import { Component } from "react";
+import { IProps, IState } from "../Interfaces/IRateModal";
 export declare class RateModal extends Component<IProps, IState> {
     static defaultProps: {
         modalTitle: string;
@@ -18,7 +18,6 @@ export declare class RateModal extends Component<IProps, IState> {
     };
     constructor(props: IProps);
     render(): JSX.Element;
-    componentWillMount(): void;
     componentWillReceiveProps(nextProps: any): void;
     private onStarSelected;
     private renderRateModal;
