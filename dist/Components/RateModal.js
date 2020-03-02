@@ -19,9 +19,9 @@ class RateModal extends react_1.Component {
         this.state = {
             isModalOpen: props.isModalOpen,
             rating: 5,
-            review: '',
+            review: "",
             reviewError: false,
-            showContactForm: false,
+            showContactForm: false
         };
     }
     render() {
@@ -33,21 +33,22 @@ class RateModal extends react_1.Component {
         const { OS } = react_native_1.Platform;
         const { totalStarCount, isVisible, starLabels, playStoreUrl, iTunesStoreUrl } = this.props;
         if (isVisible && starLabels.length !== totalStarCount) {
-            throw new Error('You should define at least 5 review values');
+            throw new Error("You should define at least 5 review values");
         }
-        else if (OS === 'android' && !playStoreUrl) {
-            throw new Error('Enter a valid store url');
+        else if (OS === "android" && !playStoreUrl) {
+            throw new Error("Enter a valid store url");
         }
-        else if (OS === 'ios' && !iTunesStoreUrl) {
-            throw new Error('Enter a valid store url');
+        else if (OS === "ios" && !iTunesStoreUrl) {
+            throw new Error("Enter a valid store url");
         }
     }
-    componentWillReceiveProps(nextProps) {
-        if (this.props.isModalOpen !== nextProps.isModalOpen) {
-            this.setState({
-                isModalOpen: nextProps.isModalOpen,
-            });
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (prevState.isModalOpen !== nextProps.isModalOpen) {
+            return {
+                isModalOpen: nextProps.isModalOpen
+            };
         }
+        return null;
     }
     onStarSelected(e) {
         const { onStarSelected } = this.props;
@@ -88,7 +89,7 @@ class RateModal extends react_1.Component {
     renderReviewError() {
         const { errorText } = RateModal_1.RateModalStyles;
         const { emptyCommentErrorMessage } = this.props;
-        return (react_1.default.createElement(react_native_1.Text, { style: errorText }, emptyCommentErrorMessage));
+        return react_1.default.createElement(react_native_1.Text, { style: errorText }, emptyCommentErrorMessage);
     }
     onClosed() {
         const { onClosed } = this.props;
@@ -102,9 +103,9 @@ class RateModal extends react_1.Component {
     sendRate() {
         const { storeRedirectThreshold, playStoreUrl, iTunesStoreUrl } = this.props;
         if (this.state.rating > storeRedirectThreshold) {
-            react_native_1.Platform.OS === 'ios' ?
-                react_native_1.Linking.openURL(iTunesStoreUrl) :
-                react_native_1.Linking.openURL(playStoreUrl);
+            react_native_1.Platform.OS === "ios"
+                ? react_native_1.Linking.openURL(iTunesStoreUrl)
+                : react_native_1.Linking.openURL(playStoreUrl);
         }
         else {
             this.setState({ showContactForm: true });
@@ -113,30 +114,30 @@ class RateModal extends react_1.Component {
     sendContactUsForm() {
         const { sendContactUsForm } = this.props;
         if (this.state.review.length > 0) {
-            if (sendContactUsForm && typeof sendContactUsForm === 'function') {
+            if (sendContactUsForm && typeof sendContactUsForm === "function") {
                 return sendContactUsForm({ ...this.state });
             }
-            throw new Error('You should generate sendContactUsForm function');
+            throw new Error("You should generate sendContactUsForm function");
         }
         else {
             this.setState({ reviewError: true });
         }
     }
 }
+exports.RateModal = RateModal;
 RateModal.defaultProps = {
-    modalTitle: 'How many stars do you give to this app?',
-    cancelBtnText: 'Cancel',
+    modalTitle: "How many stars do you give to this app?",
+    cancelBtnText: "Cancel",
     totalStarCount: 5,
     defaultStars: 5,
-    emptyCommentErrorMessage: 'Please specify your opinion.',
+    emptyCommentErrorMessage: "Please specify your opinion.",
     isVisible: true,
     isModalOpen: false,
-    commentPlaceholderText: 'You can type your comments here ...',
-    rateBtnText: 'Rate',
-    sendBtnText: 'Send',
+    commentPlaceholderText: "You can type your comments here ...",
+    rateBtnText: "Rate",
+    sendBtnText: "Send",
     storeRedirectThreshold: 3,
-    starLabels: ['Terrible', 'Bad', 'Okay', 'Good', 'Great'],
-    isTransparent: true,
+    starLabels: ["Terrible", "Bad", "Okay", "Good", "Great"],
+    isTransparent: true
 };
-exports.RateModal = RateModal;
 //# sourceMappingURL=RateModal.js.map
