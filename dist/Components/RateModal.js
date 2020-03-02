@@ -23,13 +23,6 @@ class RateModal extends react_1.Component {
             reviewError: false,
             showContactForm: false
         };
-    }
-    render() {
-        const { onClosed, isTransparent } = this.props;
-        const { isModalOpen } = this.state;
-        return (react_1.default.createElement(react_native_1.Modal, { transparent: isTransparent, visible: isModalOpen, onRequestClose: () => onClosed }, this.renderRateModal()));
-    }
-    componentWillMount() {
         const { OS } = react_native_1.Platform;
         const { totalStarCount, isVisible, starLabels, playStoreUrl, iTunesStoreUrl } = this.props;
         if (isVisible && starLabels.length !== totalStarCount) {
@@ -41,6 +34,11 @@ class RateModal extends react_1.Component {
         else if (OS === "ios" && !iTunesStoreUrl) {
             throw new Error("Enter a valid store url");
         }
+    }
+    render() {
+        const { onClosed, isTransparent } = this.props;
+        const { isModalOpen } = this.state;
+        return (react_1.default.createElement(react_native_1.Modal, { transparent: isTransparent, visible: isModalOpen, onRequestClose: () => onClosed }, this.renderRateModal()));
     }
     static getDerivedStateFromProps(nextProps, prevState) {
         if (prevState.isModalOpen !== nextProps.isModalOpen) {

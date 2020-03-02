@@ -35,23 +35,7 @@ export class RateModal extends Component<IProps, IState> {
 			reviewError: false,
 			showContactForm: false
 		};
-	}
 
-	public render(): JSX.Element {
-		const { onClosed, isTransparent } = this.props;
-		const { isModalOpen } = this.state;
-		return (
-			<Modal
-				transparent={isTransparent}
-				visible={isModalOpen}
-				onRequestClose={() => onClosed}
-			>
-				{this.renderRateModal()}
-			</Modal>
-		);
-	}
-
-	public componentWillMount(): void {
 		const { OS } = Platform;
 		const {
 			totalStarCount,
@@ -67,6 +51,20 @@ export class RateModal extends Component<IProps, IState> {
 		} else if (OS === "ios" && !iTunesStoreUrl) {
 			throw new Error("Enter a valid store url");
 		}
+	}
+
+	public render(): JSX.Element {
+		const { onClosed, isTransparent } = this.props;
+		const { isModalOpen } = this.state;
+		return (
+			<Modal
+				transparent={isTransparent}
+				visible={isModalOpen}
+				onRequestClose={() => onClosed}
+			>
+				{this.renderRateModal()}
+			</Modal>
+		);
 	}
 
 	static getDerivedStateFromProps(nextProps, prevState) {
